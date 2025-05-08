@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="dro_real_estate_transaction_state_tree_view" model="ir.ui.view">
+        <field name="name">transaction.state.tree</field>
+        <field name="model">dro.rs.property.transaction.state</field>
+        <field name="arch" type="xml">
+            <tree string="Transaction State List">
+                <field name="name" />
+                <field name="fold" />
+                <field name="sequence" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="dro_real_estate_transaction_state_action" model="ir.actions.act_window">
+        <field name="name">Transaction State</field>
+        <field name="res_model">dro.rs.property.transaction.state</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="dro_real_estate_facility_action" model="ir.actions.act_window">
+        <field name="name">Property Facility</field>
+        <field name="res_model">dro.rs.property.facility</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

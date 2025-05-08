@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <menuitem id="dro_root_menu" name="Real Estate" web_icon="odoo_real_estate,static/description/icon.png">
+        <menuitem id="dro_rs_default_view" name="Dashboard" action="dro_real_estate_transaction_action" sequence="1" />
+        <menuitem id="dro_rs_property_client_view" name="Clients" action="dro_real_estate_client_action" sequence="2" />
+        <menuitem id="dro_rs_property_availability_view" name="Properties" action="rs_property_availability_action" sequence="3" />
+        <menuitem id="dro_setting_menu" name="Configurations" sequence="4">
+            <menuitem id="dro_setting_facility_view" name="Facilities" action="dro_real_estate_facility_action" />
+            <menuitem id="dro_setting_property_type_view" name="Property Type" action="dro_real_estate_property_type_action" />
+            <menuitem id="dro_setting_property_transaction_state" name="Transaction State" action="dro_real_estate_transaction_state_action" />
+        </menuitem>
+    </menuitem>
+</odoo>

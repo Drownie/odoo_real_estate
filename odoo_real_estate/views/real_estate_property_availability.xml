@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="dro_rs_property_tree_view" model="ir.ui.view">
+        <field name="name">property.tree</field>
+        <field name="model">dro.rs.property</field>
+        <field name="arch" type="xml">
+            <tree string="Real Estate List">
+                <field name="name" />
+                <field name="total_area" />
+                <field name="building_area" />
+                <field name="agent_id" optional="hide" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="dro_rs_property_availability_kanban_view" model="ir.ui.view">
+        <field name="name">property.availability.kanban</field>
+        <field name="model">dro.rs.property</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile" quick_create="false">
+                <field name="name" />
+                <field name="landlord_id" />
+                <field name="state" />
+                <field name="availability_type" />
+                <field name="property_type" />
+                <field name="activity_state" />
+
+                <progressbar field="activity_state" colors='{"planned": "success"}'/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <div class="row mb4">
+                                <div class="col-6">
+                                    <strong><span><t t-esc="record.name.value"/></span></strong>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <field name="state" widget="label_selection" options="{'classes': {'draft': 'info', 'cancel': 'danger', 'done': 'success', 'under_repair': 'secondary'}}"/>
+                                </div>
+                            </div>
+                            <hr class="mt8 mb8"/>
+                            <div class="row">
+                                <div class="col-6 text-muted">
+                                    <span><t t-esc="record.availability_type.value"/></span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 text-muted">
+                                    <field name="property_type" />
+                                </div>
+                                <div class="col-6">
+                                    <span class="float-end">
+                                        <field name="landlord_id"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="dro_rs_property_form_view" model="ir.ui.view">
+        <field name="name">property.form</field>
+        <field name="model">dro.rs.property</field>
+        <field name="arch" type="xml">
+            <form string="Property Form">
+                <header>
+                    <button type="object" name="action_set_posted" string="Post" invisible="state != 'draft'" class="oe_highlight" />
+                    <button type="object" name="action_set_draft" string="Reset to Draft" invisible="state in ['draft']" />
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,posted" />
+                </header>
+                <sheet string="Property Form">
+                    <!-- Invisible fields -->
+                    <group invisible="1">
+                        <field name="currency_id" />
+                    </group>
+                    <group>
+                        <group>
+                            <field name="name" readonly="state != 'draft'" />
+                            <field name="total_area" readonly="state != 'draft'" />
+                            <field name="building_area" readonly="state != 'draft'" />
+                            <field name="is_active" readonly="state != 'posted'" invisible="state != 'posted'" />
+                        </group>
+                        <group>
+                            <field name="agent_id" readonly="1" />
+                            <field name="availability_type" readonly="state != 'draft'" />
+                            <field name="property_type" readonly="state != 'draft'" />
+                            <field name="price" readonly="state != 'draft'" />
+                            <field name="negotiable" readonly="state != 'draft'" />
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Property Information">
+                            <label class="o_form_label" for="address" />
+                            <div style="width: 100%; margin-bottom: 15px; margin-left: 5px;">
+                                <field name="address" placeholder="Street" style="width:100%; margin-bottom: 0;" readonly="state != 'draft'" />
+                                <field name="state_id" placeholder="State" style="width:100%; margin-bottom: 0;" options="{'no_open': True, 'no_quick_create': True}" readonly="state != 'draft'" context="{'country_id': country_id, 'default_country_id': country_id, 'zip': zip}"/>
+                                <field name="country_id" placeholder="Country" options='{"no_open": True, "no_create": True}' style="width:100%; margin-bottom: 0;" readonly="state != 'draft'" />    
+                                <field name="zip" placeholder="ZIP" readonly="state != 'draft'" style="width:100%; margin-bottom: 0;" />
+                            </div>
+
+                            <label class="o_form_label" for="spec_ids" />
+                            <field name="spec_ids" readonly="state != 'draft'">
+                                <tree editable="bottom">
+                                    <field name="facility_id" string="Name" />
+                                    <field name="quantity" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Rent Setting" invisible="availability_type != 'rent'">
+                            <group>
+                                <field name="rent_payment_term" readonly="state != 'draft'" />
+                                <field name="rent_security_deposit" readonly="state != 'draft'" />
+                            </group>
+                        </page>
+                        <page string="Landlord">
+                            <group>
+                                <field name="landlord_id" readonly="state != 'draft'" />
+                                <field name="landlord_email" invisible="not landlord_id" readonly="1" />
+                                <field name="landlord_phone" invisible="not landlord_id" readonly="1" />
+                            </group>
+                        </page>
+                        <page string="Agent Config">
+                            <group>
+                                <field name="commission_type" readonly="state != 'draft'" />
+                                <field name="commission_percentage" invisible="commission_type != 'percentage'" readonly="state != 'draft'" />
+                                <field name="commission_amount" readonly="state != 'draft'" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="dro_rs_property_availability_search_view" model="ir.ui.view">
+        <field name="name">property.available.search</field>
+        <field name="model">dro.rs.property</field>
+        <field name="arch" type="xml">
+            <search string="Property Search">
+                <filter name="dro_rs_draft_filter" string="Draft" domain="[('state', 'in', ['draft'])]" />
+                <filter name="dro_rs_posted_filter" string="Posted" domain="[('state', 'in', ['posted'])]" />
+
+                <searchpanel>
+                    <field name="property_type" icon="fa-building" enable_counters="1"/>
+                    <field name="availability_type" icon="fa-tag" enable_counters="1"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record id="rs_property_availability_action" model="ir.actions.act_window">
+        <field name="name">Availability</field>
+        <field name="res_model">dro.rs.property</field>
+        <field name="search_view_id" ref="dro_rs_property_availability_search_view"/>
+        <field name="context">{'search_default_dro_rs_posted_filter': 1}</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+</odoo>

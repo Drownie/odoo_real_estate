@@ -1,0 +1,8 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_dro_rs_proprety,access_dro_rs_proprety,model_dro_rs_property,base.group_user,1,1,1,1
+access_dro_rs_proprety_spec,access_dro_rs_proprety_spec,model_dro_rs_property_spec,base.group_user,1,1,1,1
+access_dro_rs_proprety_facility,access_dro_rs_proprety_facility,model_dro_rs_property_facility,base.group_user,1,1,1,1
+access_dro_rs_property_type,access_dro_rs_property_type,model_dro_rs_property_type,base.group_user,1,1,1,1
+access_dro_rs_property_client,access_dro_rs_property_client,model_dro_rs_property_client,base.group_user,1,1,1,1
+access_dro_rs_property_transaction,access_dro_rs_property_transaction,model_dro_rs_property_transaction,base.group_user,1,1,1,1
+access_dro_rs_property_transaction_state,access_dro_rs_property_transaction_state,model_dro_rs_property_transaction_state,base.group_user,1,1,1,1
