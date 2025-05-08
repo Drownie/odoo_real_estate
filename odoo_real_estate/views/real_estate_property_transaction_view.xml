@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="dro_rs_property_transaction_tree_view" model="ir.ui.view">
+        <field name="name">property.transaction.tree</field>
+        <field name="model">dro.rs.property.transaction</field>
+        <field name="arch" type="xml">
+            <tree string="Real Estate List">
+                <field name="name" />
+                <field name="client_id" />
+                <field name="property_id" />
+                <field name="property_type" optional="show" />
+                <field name="property_availability" optional="show" />
+                <field name="state_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="dro_rs_property_transaction_form_view" model="ir.ui.view">
+        <field name="name">property.transaction.form</field>
+        <field name="model">dro.rs.property.transaction</field>
+        <field name="arch" type="xml">
+            <form string="Transaction">
+                <header>
+                    <field name="state_id" widget="statusbar" options="{'clickable': '1', 'fold_field': 'fold'}"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group invisible="1">
+                            <field name="currency_id" />
+                            <field name="negotiable" />
+                        </group>
+                        <group>
+                            <field name="name" />
+                            <field name="client_id" />
+                            <field name="client_phone" />
+                            <field name="client_email" />
+                        </group>
+                        <group>
+                            <field name="price" />
+                            <field name="commission_type" />
+                            <field name="commission_percentage" invisible="commission_type != 'percentage'" />
+                            <field name="commission_amount" />
+                            <field name="nego_price" readonly="not negotiable" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Property Info">
+                            <group>
+                                <field name="property_id" />
+                                <field name="property_availability" />
+                                <field name="property_type" />
+                                
+                                <!-- <hr class="mt8 mb8"/> -->
+                                
+                                <field name="landlord_id" />
+                                <field name="landlord_phone" />
+                                <field name="landlord_email" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="dro_rs_property_transaction_kanban_view" model="ir.ui.view">
+        <field name="name">property.transaction.kanban</field>
+        <field name="model">dro.rs.property.transaction</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile" default_group_by="state_id" quick_create="false">
+                <field name="name" />
+                <field name="state_id" />
+                <field name="property_availability" />
+                <field name="property_type" />
+                <field name="activity_state" />
+
+                <progressbar field="activity_state" colors='{"planned": "success"}'/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click">
+                            <div class="row mb4">
+                                <div class="col-6">
+                                    <strong><span><t t-esc="record.name.value"/></span></strong>
+                                </div>
+                                <div class="col-6 text-end">
+                                    <span><t t-esc="record.state_id.value"/></span>
+                                </div>
+                            </div>
+                            <hr class="mt8 mb8"/>
+                            <div class="row">
+                                <div class="col-6 text-muted">
+                                    <field name="property_type" />
+                                </div>
+                                <div class="col-6">
+                                    <span class="float-end">
+                                        <field name="property_availability"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="dro_rs_property_transaction_search_view" model="ir.ui.view">
+        <field name="name">property.transaction.search</field>
+        <field name="model">dro.rs.property.transaction</field>
+        <field name="arch" type="xml">
+            <search string="Property Transaction Search">
+                <!-- <filter name="dro_rs_default_filter" string="Default" domain="[('state', 'in', ['draft', 'posted'])]" />
+                <group expand="0" string="Group By">
+                    <filter name="group_state" string="State" domain="[]" context="{'group_by': 'state'}"/>
+                </group> -->
+            </search>
+        </field>
+    </record>
+    
+    <!-- Default act_window -->
+    <record id="dro_real_estate_transaction_action" model="ir.actions.act_window">
+        <field name="name">Transaction</field>
+        <field name="res_model">dro.rs.property.transaction</field>
+        <field name="search_view_id" ref="dro_rs_property_transaction_search_view"/>
+        <field name="context">{}</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+</odoo>
