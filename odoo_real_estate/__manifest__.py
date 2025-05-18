@@ -1,5 +1,5 @@
 {
-    'name': "Odoo Real Estate",
+    'name': "Real Estate Management App",
     'version': '1.0.0',
     'summary': "Real estate management app for brokers",
     'description': "Real estate management app, to help manage sales, properties, statuses, etc.",
@@ -21,10 +21,11 @@
         'views/real_estate_property_transaction_view.xml',
         'views/real_estate_property_transaction_state_view.xml',
         'views/menu.xml',
-    ],
+    ], 
     'assets': {
     },
     'images': [
+        'static/description/banner.png',
         'static/description/screenshot_app.png',
     ],
     'license': "AGPL-3",
