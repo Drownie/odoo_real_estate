@@ -8,7 +8,7 @@
                 <field name="name" />
                 <field name="email" />
                 <field name="phone" />
-                <field name="rating" optional="hide" widget="custom-priority" />
+                <field name="rating" optional="hide" widget="rating-widget" />
             </tree>
         </field>
     </record>
@@ -30,7 +30,7 @@
                             <field name="partner_id" />
                             <field name="email" />
                             <field name="phone" />
-                            <field name="rating" widget="custom-priority" />
+                            <field name="rating" widget="rating-widget" />
                             <field name="special_note" />
                         </group>
                     </group>
