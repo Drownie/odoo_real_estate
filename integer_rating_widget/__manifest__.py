@@ -13,5 +13,5 @@
         ],
     },
     'application': False,
-    "lisence":"LGPL-3"
+    "lisence":"AGPL-3"
 }
