@@ -4,7 +4,7 @@
     'summary': "Real estate management app for brokers",
     'description': "Real estate management app, to help manage sales, properties, statuses, etc.",
     'author': 'Abraham Mahanaim',
-    'depends': ['base', 'integer_rating_widget'],
+    'depends': ['base'],
     'category': 'Applications',
     'data': [
         # Data

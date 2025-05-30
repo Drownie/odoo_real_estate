@@ -12,6 +12,9 @@
             'rating_widget/static/src/js/rating.js',
         ],
     },
+    'images': [
+        'static/description/banner.png',
+    ],
     'application': False,
     "lisence":"AGPL-3"
 }
