@@ -16,5 +16,5 @@
         'static/description/banner.png',
     ],
     'application': False,
-    "lisence":"AGPL-3"
+    'license': "AGPL-3",
 }
