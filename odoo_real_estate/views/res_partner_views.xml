@@ -12,7 +12,7 @@
             <xpath expr="//notebook" position="inside" >
                 <page string="Real Estate" name="real_estate_config" sequence="99" invisible="not is_property_client">
                     <group>
-                        <field name="rating" />
+                        <field name="rating" widget="integer-rating" />
                     </group>
                 </page>
             </xpath>
@@ -20,7 +20,7 @@
     </record>
 
     <record id="dro_real_estate_client_search_view" model="ir.ui.view">
-        <field name="name">dro.real.estate.client.tree.view</field>
+        <field name="name">dro.real.estate.client.search.view</field>
         <field name="model">res.partner</field>
         <field name="arch" type="xml">
             <search string="Client Search">
@@ -42,10 +42,7 @@
                 <field name="email" optional="show" />
                 <field name="is_property_client" optional="show" />
                 <field name="user_id" optional="show" widget="many2one_avatar_user" domain="[('share', '=', False)]"/>
-                <field name="city" optional="show"/>
-                <field name="state_id" optional="hide" readonly="1"/>
-                <field name="country_id" optional="show" readonly="1"/>
-                <field name="category_id" optional="hide" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                <field name="rating" widget="integer-rating" optional="show" />
                 <field name="parent_id" readonly="1" column_invisible="True"/>
                 <field name="active" column_invisible="True"/>
             </tree>
@@ -59,5 +56,9 @@
         <field name="search_view_id" ref="dro_real_estate_client_search_view"/>
         <field name="context">{'search_default_is_taken': True, 'default_is_property_client': True}</field>
         <field name="view_mode">kanban,tree,form</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'kanban'}),
+            (0, 0, {'view_mode': 'tree', 'view_id': ref('odoo_real_estate.dro_real_estate_client_tree_view')}),
+            (0, 0, {'view_mode': 'form'})]"/>
     </record>
 </odoo>

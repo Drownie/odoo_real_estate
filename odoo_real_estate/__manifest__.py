@@ -6,7 +6,7 @@
     'author': 'Abraham Mahanaim',
     'depends': [
         'base', 
-        # 'integer_rating_widget'
+        'integer_rating_widget'
     ],
     'category': 'Applications',
     'data': [
