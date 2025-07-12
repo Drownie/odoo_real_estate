@@ -1,7 +1,7 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
-class RealEstateAmenities(models.Model):
+class DroRsPropertyFacility(models.Model):
     _name = 'dro.rs.property.facility'
     _description = 'Real Estate Facility'
 

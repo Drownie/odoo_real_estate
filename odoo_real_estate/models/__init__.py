@@ -1,3 +1,7 @@
-from . import real_estate_property, real_estate_property_facility, real_estate_property_spec
-from . import real_estate_property_type, real_estate_property_client, real_estate_property_transaction
-from . import real_estate_property_transaction_state
+from . import dro_rs_property
+from . import dro_rs_property_facility
+from . import dro_rs_property_spec
+from . import dro_rs_property_type
+from . import dro_rs_property_transaction
+from . import dro_rs_property_transaction_state
+from . import res_partner

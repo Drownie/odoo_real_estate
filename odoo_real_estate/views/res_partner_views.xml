@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="dro_real_estate_client_view_partner_form" model="ir.ui.view">
+        <field name="name">dro.real.estate.client.view.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="is_property_client" />
+            </xpath>
+
+            <xpath expr="//notebook" position="inside" >
+                <page string="Real Estate" name="real_estate_config" sequence="99" invisible="not is_property_client">
+                    <group>
+                        <field name="rating" />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="dro_real_estate_client_search_view" model="ir.ui.view">
+        <field name="name">dro.real.estate.client.tree.view</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <search string="Client Search">
+                 <field name="is_property_client" />
+                 <filter string="Client" name="is_taken" domain="[('is_property_client', '=', True)]" />
+            </search>
+        </field>
+    </record>
+
+    <record id="dro_real_estate_client_tree_view" model="ir.ui.view">
+        <field name="name">dro.real.estate.client.tree.view</field>
+        <field name="model">res.partner</field>
+        <field name="arch" type="xml">
+            <tree string="Client Contacts">
+                <field name="display_name" string="Name" column_invisible="1"/>
+                <field name="complete_name" string="Name"/>
+                <field name="phone" optional="show" />
+                <field name="mobile" optional="hide" />
+                <field name="email" optional="show" />
+                <field name="is_property_client" optional="show" />
+                <field name="user_id" optional="show" widget="many2one_avatar_user" domain="[('share', '=', False)]"/>
+                <field name="city" optional="show"/>
+                <field name="state_id" optional="hide" readonly="1"/>
+                <field name="country_id" optional="show" readonly="1"/>
+                <field name="category_id" optional="hide" widget="many2many_tags" options="{'color_field': 'color'}"/>
+                <field name="parent_id" readonly="1" column_invisible="True"/>
+                <field name="active" column_invisible="True"/>
+            </tree>
+        </field>
+    </record>
+    
+    <!-- Default act_window -->
+    <record id="dro_real_estate_client_action" model="ir.actions.act_window">
+        <field name="name">Clients</field>
+        <field name="res_model">res.partner</field>
+        <field name="search_view_id" ref="dro_real_estate_client_search_view"/>
+        <field name="context">{'search_default_is_taken': True, 'default_is_property_client': True}</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+</odoo>

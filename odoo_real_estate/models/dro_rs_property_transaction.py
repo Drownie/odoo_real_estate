@@ -4,7 +4,7 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
-class Transaction(models.Model):
+class DroRsPropertyTransaction(models.Model):
     _name = 'dro.rs.property.transaction'
     _description = 'Transaction'
 
@@ -15,6 +15,18 @@ class Transaction(models.Model):
 
         # return stages.search([('id', 'in', stages.ids)])
         return self.env['dro.rs.property.transaction.state'].search([])
+    
+    @api.model
+    def write(self, vals):
+        res = super(DroRsPropertyTransaction, self).write(vals)
+
+        # Convert the partner into property client
+        for rec in self:
+            if 'client_id' in vals:
+                if not rec.client_id.is_property_client:
+                    rec.client_id.is_property_client = True
+
+        return res
     
     # Compute methods
     def _compute_currency_id(self):
@@ -35,7 +47,7 @@ class Transaction(models.Model):
 
     name = fields.Char('Title')
     
-    client_id = fields.Many2one('dro.rs.property.client', required=True)
+    client_id = fields.Many2one('res.partner', required=True)
 
     client_phone = fields.Char(related='client_id.phone')
 

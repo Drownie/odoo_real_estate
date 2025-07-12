@@ -10,7 +10,7 @@ STATE = [
     ('posted', 'Posted'),
 ]
 
-class RealEstate(models.Model):
+class DroRsProperty(models.Model):
     _name = 'dro.rs.property'
     _description = 'Property Item'
 

@@ -1,6 +1,6 @@
 from odoo import models, fields
 
-class RealEstateSpec(models.Model):
+class DroRsPropertySpec(models.Model):
     _name = 'dro.rs.property.spec'
     _description = 'List every real estate specifications'
 

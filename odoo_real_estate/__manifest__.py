@@ -1,10 +1,13 @@
 {
     'name': "Real Estate Management App",
-    'version': '1.0.0',
+    'version': '17.0.0.1.0',
     'summary': "Real estate management app for brokers",
     'description': "Real estate management app, to help manage sales, properties, statuses, etc.",
     'author': 'Abraham Mahanaim',
-    'depends': ['base', 'integer_rating_widget'],
+    'depends': [
+        'base', 
+        # 'integer_rating_widget'
+    ],
     'category': 'Applications',
     'data': [
         # Data
@@ -14,12 +17,13 @@
         'security/ir.model.access.csv',
 
         # Views
-        'views/real_estate_property_type_view.xml',
-        'views/real_estate_property_spec_view.xml',
-        'views/real_estate_property_availability.xml',
-        'views/real_estate_property_client_view.xml',
-        'views/real_estate_property_transaction_view.xml',
-        'views/real_estate_property_transaction_state_view.xml',
+        'views/res_partner_views.xml',
+        'views/dro_rs_property_facility_views.xml',
+        'views/dro_rs_property_transaction_state_views.xml',
+        'views/dro_rs_property_transaction_views.xml',
+        'views/dro_rs_property_type_views.xml',
+        'views/dro_rs_property_views.xml',
+        'views/res_partner_views.xml',
         'views/menu.xml',
     ], 
     'assets': {

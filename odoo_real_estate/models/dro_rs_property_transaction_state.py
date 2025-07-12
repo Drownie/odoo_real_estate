@@ -1,6 +1,6 @@
 from odoo import models, fields, api
 
-class TransactionState(models.Model):
+class DroRsPropertyTransactionState(models.Model):
     _name = 'dro.rs.property.transaction.state'
     _description = 'Transaction State'
 
