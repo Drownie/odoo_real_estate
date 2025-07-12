@@ -2,42 +2,34 @@
 
 import { registry } from "@web/core/registry";
 import { _t } from "@web/core/l10n/translation";
-import { standardFieldProps } from "@web/views/fields/standard_field_props";
+import { PriorityField } from "@web/views/fields/priority/priority_field";
 
-import { Component, useState } from "@odoo/owl";
+import { useState } from "@odoo/owl";
 
-export class RatingField extends Component {
-    static template = "rating_widget.RatingWidget";
-    static props = {
-        ...standardFieldProps,
-        withCommand: { type: Boolean, optional: true },
-        autosave: { type: Boolean, optional: true },
-        star_num: { type: Number, optional: false },
-    };
+export class RatingField extends PriorityField {
+    static template = "integer_rating_widget.RatingWidget";
 
-    setup() {
-        this.state = useState({
-            index: -1,
-        });
+    static get props() {
+        return {
+            ...super.props,
+            star_num: { type: Number, optional: false },
+        };
     }
 
-    get tooltipLabel() {
-        return this.props.record.fields[this.props.name].string;
-    }
     get options() {
         return Array.from({length: this.props.star_num}, (_, i) => i);
     }
+
+    setup() {
+        super.setup();
+    }
+
     get index() {
         return this.state.index > -1
             ? this.state.index
             : this.options.findIndex((o) => o === this.props.record.data[this.props.name]);
     }
 
-    getTooltip(value) {
-        return this.tooltipLabel && this.tooltipLabel !== value
-            ? `${this.tooltipLabel}: ${value}`
-            : value;
-    }
     /**
      * @param {string} value
      */
@@ -55,9 +47,9 @@ export class RatingField extends Component {
     }
 }
 
-export const priorityField = {
+export const ratingField = {
     component: RatingField,
-    displayName: _t("Custom Priority"),
+    displayName: _t("Integer Rating"),
     supportedOptions: [
         {
             label: _t("Autosave"),
@@ -80,4 +72,4 @@ export const priorityField = {
     },
 };
 
-registry.category("fields").add("rating-widget", priorityField);
+registry.category("fields").add("integer-rating", ratingField);
