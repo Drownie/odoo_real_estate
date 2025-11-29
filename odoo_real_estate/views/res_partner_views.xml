@@ -12,7 +12,7 @@
             <xpath expr="//notebook" position="inside" >
                 <page string="Real Estate" name="real_estate_config" sequence="99" invisible="not is_property_client">
                     <group>
-                        <field name="rating" widget="integer-rating" />
+                        <field name="rating" widget="integer_rating" />
                     </group>
                 </page>
             </xpath>
