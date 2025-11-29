@@ -4,8 +4,6 @@ import { registry } from "@web/core/registry";
 import { _t } from "@web/core/l10n/translation";
 import { PriorityField } from "@web/views/fields/priority/priority_field";
 
-import { useState } from "@odoo/owl";
-
 export class RatingField extends PriorityField {
     static template = "integer_rating_widget.RatingWidget";
 
@@ -72,4 +70,4 @@ export const ratingField = {
     },
 };
 
-registry.category("fields").add("integer-rating", ratingField);
+registry.category("fields").add("integer_rating", ratingField);

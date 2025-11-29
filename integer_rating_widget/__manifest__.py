@@ -1,7 +1,7 @@
 {
     'name'          : "Integer Rating Widget",
     'version'       : "1.0",
-    'depends'       : ['base'], 
+    'depends'       : ['web'], 
     'category'      : 'Widget',
     'author'        : "Abraham Mahanaim",
     'description'   : "Rating Widget to Support Integer fields",

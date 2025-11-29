@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates xml:space="preserve">
-
     <t t-name="integer_rating_widget.RatingWidget">
         <div class="o_priority" role="radiogroup" name="priority" aria-label="Priority">
             <t t-foreach="options" t-as="value" t-key="value">
@@ -35,5 +34,4 @@
             </t>
         </div>
     </t>
-
 </templates>
